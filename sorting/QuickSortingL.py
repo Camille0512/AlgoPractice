@@ -16,15 +16,8 @@ class quicksort:
 
 
 if __name__=="__main__":
-    tarSortList = [3,1,8,6,9,4,2,5]
+    tarSortList = [3,1,8,6,9,4,2,5,0]
+    print("raw list:", tarSortList)
     qs = quicksort()
     newList = qs.QuickSortWithPivot(target_list=tarSortList)
-    print(newList)
-
-from datetime import datetime
-from pytz import timezone
-a = datetime.now().hour
-print(a, type(a))
-# tz = timezone("Asia/Shanghai")
-tz = timezone("UTC")
-print(datetime.now(tz))
+    print("new list:", newList)

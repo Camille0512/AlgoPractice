@@ -31,6 +31,7 @@ class MergeSort:
 
 if __name__ == "__main__":
     tarSortList = [3, 1, 8, 6, 9, 4, 2, 5, 8, 3, 0, 0.4]
+    print("raw list:", tarSortList)
     ms = MergeSort()
     newList = ms.merge_lists(tarSortList)
     print('newList: ', newList)
