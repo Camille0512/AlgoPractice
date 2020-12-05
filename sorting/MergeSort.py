@@ -1,4 +1,7 @@
 class MergeSort:
+    def __init__(self):
+        pass
+
     def merge_lists(self, sublist: list):
         if len(sublist)==1: return sublist
         if sublist==None: return
