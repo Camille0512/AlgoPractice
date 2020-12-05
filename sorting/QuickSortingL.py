@@ -1,4 +1,7 @@
 class quicksort:
+    def __init__(self):
+        pass
+
     def QuickSortWithPivot(self, target_list: list):
         if len(target_list)<=1: return target_list
         pivot = target_list.pop(-1)
