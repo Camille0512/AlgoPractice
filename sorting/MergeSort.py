@@ -1,37 +1,55 @@
+from random import randint
+
 class MergeSort:
     def __init__(self):
         pass
 
-    def merge_lists(self, sublist: list):
-        if len(sublist)==1: return sublist
-        if sublist==None: return
-        left_list = sublist[:int(len(sublist) / 2)]
-        right_list = sublist[int(len(sublist) / 2):]
-        left_list = self.merge_lists(left_list)
-        right_list = self.merge_lists(right_list)
-        return self.sort_list(left_list, right_list)
+    def merge_lists(self, sublist: list, ascending = True):
+        if len(sublist) == 1 or not sublist: return sublist
+        mid = int(len(sublist) / 2)
+        left = sublist[:mid]
+        right = sublist[mid:]
+        left = self.merge_lists(left)
+        right = self.merge_lists(right)
+        if ascending:
+            return self.sort_SmallToLarge(left, right)
+        else:
+            return self.sort_LargeToSmall(left, right)
 
-    def sort_list(self, leftList: list, rightList: list):
-        sorted_list = []
-
-        l, r = 0, 0
-        while len(leftList) > l and len(rightList) > r:
-            if leftList[l] >= rightList[r]:
-                sorted_list.append(leftList[l])
-                l += 1
+    def sort_SmallToLarge(self, leftList: list, rightList: list):
+        '''
+        From the small to the large.
+        '''
+        res = []
+        while leftList and rightList:
+            if leftList[0] < rightList[0]:
+                res.append(leftList[0])
+                leftList.remove(res[-1])
             else:
-                sorted_list.append(rightList[r])
-                r += 1
-        if l < len(leftList) and r == len(rightList):
-            sorted_list += leftList[l:]
-        elif l == len(leftList) and r < len(rightList):
-            sorted_list += rightList[r:]
+                res.append(rightList[0])
+                rightList.remove(res[-1])
+        res += leftList if leftList else rightList
+        return res
 
-        return sorted_list
+    def sort_LargeToSmall(self, leftList: list, rightList: list):
+        '''
+        From the large to the small.
+        '''
+        res = []
+        while leftList and rightList:
+            if leftList[0] > rightList[0]:
+                res.append(leftList[0])
+                leftList.remove(res[-1])
+            else:
+                res.append(rightList[0])
+                rightList.remove(res[-1])
+        res += leftList if leftList else rightList
+        return res
 
 if __name__ == "__main__":
-    tarSortList = [3, 1, 8, 6, 9, 4, 2, 5, 8, 3, 0, 0.4]
-    print("raw list:", tarSortList)
+    testlist = [[randint(1,50) for i in range(10)] for j in range(3)]
     ms = MergeSort()
-    newList = ms.merge_lists(tarSortList)
-    print('newList: ', newList)
+    for t in testlist:
+        newList = ms.merge_lists(t, True)
+        print("raw list:", t)
+        print('newList: ', newList, '\n')
