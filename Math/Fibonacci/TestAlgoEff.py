@@ -38,6 +38,7 @@ def fib03(n):
     else:
         return a
 
+
 def speedTesting(funcnum, n):
     res, microSec = 0, 0
     if funcnum == 1:
